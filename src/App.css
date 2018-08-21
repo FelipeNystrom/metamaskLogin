@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+body {
+  display: flex;
+  background: #212121;
+  justify-content: center;
+  align-items: center;
+  font: 24px/1.4 'Open Sans', sans-serif;
+  color: #fff;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+  height: 100vh;
+}

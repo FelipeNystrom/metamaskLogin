@@ -1,0 +1,56 @@
+#inputWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 1%;
+  align-items: center;
+  max-width: 100%;
+}
+
+#inputWrapper h2 {
+  text-transform: capitalize;
+}
+
+#inputWrapper input[type='submit'] {
+  background-color: inherit;
+  color: rgba(255, 255, 255, 0.8);
+  border-style: none;
+  padding: 3% 5%;
+  text-align: center;
+  width: 100%;
+  font-size: 1em;
+  border-radius: 0.2em;
+  transition: all 0.2s ease-in-out;
+}
+
+#inputWrapper input[type='submit']:hover {
+  background-color: #c2c2c2;
+  color: #575757;
+}
+
+#inputWrapper label {
+  margin-top: 1em;
+  width: 100%;
+  padding: 0 auto;
+  color: rgba(255, 255, 255, 0.8);
+  transform: 0.2s;
+  font-size: 0.6em;
+  transition: all 0.2s ease-in-out;
+}
+
+#inputWrapper label:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+#inputWrapper label input,
+textarea {
+  width: 100%;
+}
+
+#inputWrapper textarea {
+  border-radius: 0.2em;
+}
+
+#inputWrapper textarea:hover {
+  transform: scale(1.01);
+  transition: all 0.2s ease-in-out;
+}
