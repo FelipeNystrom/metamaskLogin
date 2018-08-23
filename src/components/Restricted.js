@@ -12,6 +12,16 @@ class Restricted extends Component {
     if (!this.props.user) this.setState({ userAlreadyExist: false });
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.user !== this.props.user &&
+      this.state.userAlreadyExist === true
+    ) {
+      this.setState({ userAlreadyExist: false });
+      this.checkIfUserExists(this.props.user);
+    }
+  }
+
   checkIfUserExists = async user => {
     const checkUserUrl = `http://localhost:5000/api/user/find`;
 
@@ -28,8 +38,9 @@ class Restricted extends Component {
     });
 
     const doUserExists = await response.json();
-    console.log(doUserExists);
-    if (doUserExists.length !== 0) this.setState({ userAlreadyExist: true });
+    if (doUserExists.length !== 0) {
+      this.setState({ userAlreadyExist: true });
+    }
     if (doUserExists.length === 0) {
       this.createUser(user);
       this.setState({ userAlreadyExist: true });

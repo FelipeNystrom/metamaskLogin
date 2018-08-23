@@ -12,10 +12,14 @@ class App extends Component {
     user: '',
     metamaskError: ''
   };
-
   componentDidMount() {
-    // listen for changes in metamask account
     web3.currentProvider.publicConfigStore.on('update', this.checkIfMetaMask);
+  }
+
+  componentDidUpdate(prevState) {
+    if (prevState.user !== this.state.user) {
+      this.checkIfMetaMask;
+    }
   }
 
   checkIfMetaMask = async () => {
@@ -44,9 +48,8 @@ class App extends Component {
 
   fetchUserAndLogin = userInput => {
     this.setState(prevState => {
-      if (prevState.user !== this.state.user || this.state.user === '') {
+      if (prevState.user !== userInput || this.state.user === '') {
         return {
-          prevState,
           user: userInput,
           checkingForMetaMask: '',
           isLoggedIn: true
