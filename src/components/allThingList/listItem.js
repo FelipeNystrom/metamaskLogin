@@ -18,7 +18,7 @@ class ListItem extends Component {
         <input id="one" type="checkbox" />
         <label htmlFor="one">
           <span />
-          {this.props.children}
+          <p>{this.props.children}</p>
           <ins>
             <i>{this.props.children}</i>
           </ins>

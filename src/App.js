@@ -18,7 +18,7 @@ class App extends Component {
 
   componentDidUpdate(prevState) {
     if (prevState.user !== this.state.user) {
-      this.checkIfMetaMask;
+      this.checkIfMetaMask();
     }
   }
 

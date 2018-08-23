@@ -32,7 +32,7 @@ class addToList extends Component {
             Add Requirement
             <textarea
               type="text"
-              onKeyPress={this.checkKey}
+              onKeyDown={this.checkKey}
               onChange={this.handleChange}
               id="requriement"
               name="input"
