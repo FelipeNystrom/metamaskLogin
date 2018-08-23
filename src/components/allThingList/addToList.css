@@ -1,4 +1,5 @@
 #inputWrapper {
+  flex: 1;
   display: flex;
   flex-direction: column;
   padding: 1%;
@@ -14,10 +15,10 @@
   background-color: inherit;
   color: rgba(255, 255, 255, 0.8);
   border-style: none;
-  padding: 3% 5%;
+  padding: 4% 5%;
+  font-size: 0.8em;
   text-align: center;
   width: 100%;
-  font-size: 1em;
   border-radius: 0.2em;
   transition: all 0.2s ease-in-out;
 }

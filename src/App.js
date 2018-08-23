@@ -3,13 +3,31 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import Restricted from './components/Restricted';
 import LoginMetamask from './components/web3-metamask/loginMetamask';
-import PollForUser from './components/web3-metamask/PollForUser';
+import web3 from './web3';
 
 class App extends Component {
   state = {
     isLoggedIn: false,
+    checkingForMetaMask: 'Loading...',
     user: '',
     metamaskError: ''
+  };
+
+  componentDidMount() {
+    // listen for changes in metamask account
+    web3.currentProvider.publicConfigStore.on('update', this.checkIfMetaMask);
+  }
+
+  checkIfMetaMask = async () => {
+    await web3.eth.getAccounts((err, accounts) => {
+      if (err !== null) {
+        console.error('An error occurred: ' + err);
+      } else if (accounts.length === 0) {
+        this.noMetaMask();
+      } else {
+        this.fetchUserAndLogin(accounts[0]);
+      }
+    });
   };
 
   noMetaMask = () => {
@@ -17,6 +35,7 @@ class App extends Component {
       return {
         prevState,
         metamaskError: 'Please log in on your metamask account',
+        checkingForMetaMask: '',
         isLoggedIn: false,
         user: ''
       };
@@ -29,6 +48,7 @@ class App extends Component {
         return {
           prevState,
           user: userInput,
+          checkingForMetaMask: '',
           isLoggedIn: true
         };
       }
@@ -36,7 +56,7 @@ class App extends Component {
   };
 
   render() {
-    const { isLoggedIn, user, metamaskError } = this.state;
+    const { isLoggedIn, user, metamaskError, checkingForMetaMask } = this.state;
     // auth middleware to check login
     const PrivateRoute = ({ render: Component, ...rest }) => (
       <Route
@@ -59,31 +79,31 @@ class App extends Component {
     );
     return (
       <div className="App">
-        <PollForUser
-          noMetaMask={this.noMetaMask}
-          fetchUserAndLogin={this.fetchUserAndLogin}
-        />
-        <Router>
-          <Fragment>
-            <PrivateRoute
-              render={() => {
-                return <Restricted name={user} />;
-              }}
-            />
-            <Route
-              exact
-              path="/login"
-              render={() => {
-                return (
-                  <LoginMetamask
-                    isLoggedIn={isLoggedIn}
-                    metamaskError={metamaskError}
-                  />
-                );
-              }}
-            />
-          </Fragment>
-        </Router>
+        {checkingForMetaMask ? (
+          <h1>{checkingForMetaMask}</h1>
+        ) : (
+          <Router>
+            <Fragment>
+              <PrivateRoute
+                render={() => {
+                  return <Restricted user={user} />;
+                }}
+              />
+              <Route
+                exact
+                path="/login"
+                render={() => {
+                  return (
+                    <LoginMetamask
+                      isLoggedIn={isLoggedIn}
+                      metamaskError={metamaskError}
+                    />
+                  );
+                }}
+              />
+            </Fragment>
+          </Router>
+        )}
       </div>
     );
   }

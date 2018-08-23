@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
-import Checklist from './Checklist';
-import ChecklistInput from './ChecklistInput';
+import List from './allThingList/list';
 import './Restricted.css';
 
 class Restricted extends Component {
   state = {
-    req: []
+    userAlreadyExist: false
   };
 
-  queryDB = async user => {
-    const url = `http://localhost:5000/api/user/${user}`;
+  componentDidMount() {
+    if (!this.state.userAlreadyExist) this.checkIfUserExists(this.props.user);
+    if (!this.props.user) this.setState({ userAlreadyExist: false });
+  }
 
-    const result = await fetch(url, {
+  checkIfUserExists = async user => {
+    const checkUserUrl = `http://localhost:5000/api/user/find`;
+
+    let response = await fetch(checkUserUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=utf-8'
@@ -22,27 +26,42 @@ class Restricted extends Component {
         user: user
       })
     });
-    console.log(result);
+
+    const doUserExists = await response.json();
+    console.log(doUserExists);
+    if (doUserExists.length !== 0) this.setState({ userAlreadyExist: true });
+    if (doUserExists.length === 0) {
+      this.createUser(user);
+      this.setState({ userAlreadyExist: true });
+    }
   };
 
-  fetchNewReq = newReq => {
-    this.setState(prevState => {
-      return { req: [...prevState.req, newReq] };
+  createUser = async user => {
+    const createUserUrl = `http://localhost:5000/api/user/create`;
+    const response = await fetch(createUserUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+        // "Content-Type": "application/x-www-form-urlencoded",
+      },
+      mode: 'cors',
+      body: JSON.stringify({
+        user: user
+      })
     });
+
+    const isUserCreated = await response.json();
+    console.log(isUserCreated);
   };
 
   render() {
-    const { name } = this.props;
-    const { req } = this.state;
+    const { user } = this.props;
     return (
       <div className="listView">
-        <div className="flexUser">Welcome {name}</div>
-        <div className="flexInput">
-          <ChecklistInput fetchNewReq={this.fetchNewReq} />
-        </div>
+        <div className="flexUser">Welcome {user}</div>
 
-        <div className="flexList">
-          <Checklist listItemContent={req} />
+        <div user={user} className="flexList">
+          <List />
         </div>
       </div>
     );

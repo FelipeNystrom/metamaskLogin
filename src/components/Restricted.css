@@ -6,15 +6,14 @@
   align-self: center;
 }
 .flexUser {
-  margin: 5% 0;
-  flex: 1;
+  margin: 2% 0;
+  margin-bottom: 0;
+  flex: 0.2;
   font-size: 0.51em;
 }
 
-.flexInput {
-  flex: 2;
-}
-
 .flexList {
+  display: flex;
+  flex-direction: column;
   flex: 2;
 }

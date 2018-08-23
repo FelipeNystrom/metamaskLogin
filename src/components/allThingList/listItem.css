@@ -1,3 +1,7 @@
+li {
+  list-style: none;
+}
+
 input[type='checkbox'] {
   height: 0;
   width: 0;
@@ -24,6 +28,7 @@ input[type='checkbox'] + label > ins {
 }
 input[type='checkbox'] + label > ins > i {
   position: absolute;
+  margin: 0;
   bottom: 0;
   font-style: normal;
   color: #4fc3f7;

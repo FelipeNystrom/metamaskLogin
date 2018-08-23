@@ -1,0 +1,26 @@
+ul {
+  /* list-style: none; */
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em;
+  overflow-y: scroll;
+  max-height: 70%;
+}
+
+.list {
+  max-height: 70%;
+  flex: 3;
+}
+.listTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.listTitleInput {
+  font-size: 1em;
+  background-color: #212121;
+  color: rgba(255, 255, 255, 0.8);
+  border-style: none;
+  text-align: center;
+  margin: 0 auto;
+}

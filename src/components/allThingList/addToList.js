@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import './ChecklistInput.css';
-
-class ChecklistInput extends Component {
+import './addToList.css';
+class addToList extends Component {
   state = {
     inputTitle: '',
     input: ''
@@ -14,19 +13,27 @@ class ChecklistInput extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.fetchNewReq(this.state.input);
+    this.props.fetchNewItem(this.state.input);
     this.setState({ input: '' });
+  };
+
+  checkKey = e => {
+    console.log(typeof e.key);
+    if (e.key === 'Enter') {
+      this.props.fetchNewItem(this.state.input);
+      this.setState({ input: '' });
+    }
   };
 
   render() {
     return (
       <Fragment>
         <form id="inputWrapper" onSubmit={this.handleSubmit}>
-          <h2>requriments</h2>
           <label htmlFor="requriement">
-            Requriment specified
+            Add Requirement
             <textarea
               type="text"
+              onKeyPress={this.checkKey}
               onChange={this.handleChange}
               id="requriement"
               name="input"
@@ -36,11 +43,11 @@ class ChecklistInput extends Component {
               required
             />
           </label>
-          <input type="submit" value="New Requirement" />
+          <input type="submit" value="Add to list" />
         </form>
       </Fragment>
     );
   }
 }
 
-export default ChecklistInput;
+export default addToList;
