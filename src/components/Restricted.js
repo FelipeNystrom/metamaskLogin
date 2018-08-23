@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import ListDashboard from './allThingList/listDashboard';
 import List from './allThingList/list';
 import './Restricted.css';
 
 class Restricted extends Component {
   state = {
-    userAlreadyExist: false
+    userAlreadyExist: false,
+    createList: false
   };
 
   componentDidMount() {
@@ -65,14 +67,37 @@ class Restricted extends Component {
     console.log(isUserCreated);
   };
 
+  handleCreateList = e => {
+    e.preventDefault();
+    this.setState({ createList: true });
+  };
+
+  handleSaveList = e => {
+    e.preventDefault();
+    this.setState({ createList: false });
+  };
+
   render() {
     const { user } = this.props;
-    return (
-      <div className="listView">
-        <div className="flexUser">Welcome {user}</div>
+    const { createList } = this.state;
 
-        <div user={user} className="flexList">
-          <List />
+    return (
+      <div className="mainView">
+        <div className="mainNav">
+          <span>Welcome {user}</span>
+          {createList ? (
+            <button onClick={this.handleSaveList} className="saveNewList">
+              Save List
+            </button>
+          ) : (
+            <button onClick={this.handleCreateList} className="createNewList">
+              Create New List
+            </button>
+          )}
+        </div>
+
+        <div className="flexList">
+          {createList ? <List user={user} /> : <ListDashboard />}
         </div>
       </div>
     );

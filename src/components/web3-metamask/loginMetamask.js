@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import './loginMetaMask.css';
 
 class checkMM extends Component {
   state = {
@@ -25,7 +26,7 @@ class checkMM extends Component {
     }
 
     return (
-      <div>
+      <div className="errorWrapper">
         <h1>{metamaskError}</h1>
       </div>
     );

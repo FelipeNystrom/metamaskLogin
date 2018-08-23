@@ -1,15 +1,50 @@
-.listView {
-  margin-top: 5%;
+.mainView {
+  width: 100%;
   display: flex;
   flex-direction: column;
   flex: 1;
-  align-self: center;
 }
-.flexUser {
-  margin: 2% 0;
-  margin-bottom: 0;
-  flex: 0.2;
-  font-size: 0.4em;
+.mainNav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 2% 0 0 5%;
+  padding: 2% 6% 2% 2%;
+  font-size: 0.7em;
+}
+.createNewList {
+  border-style: none;
+  outline-style: none;
+  background-color: inherit;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0.4em 0.6em;
+  font-size: 1em;
+  text-align: center;
+  border-radius: 0.2em;
+  transition: all 0.2s ease-in-out;
+}
+
+.createNewList:hover {
+  background-color: #d1d1d1;
+  color: #333333;
+}
+
+.saveNewList {
+  border-style: none;
+  outline-style: none;
+  background-color: inherit;
+  color: rgba(255, 255, 255, 0.8);
+  margin-right: 1em;
+  padding: 0.4em 0.6em;
+  font-size: 1em;
+  text-align: center;
+  border-radius: 0.2em;
+  transition: all 0.2s ease-in-out;
+}
+
+.saveNewList:hover {
+  background-color: #d1d1d1;
+  color: #333333;
 }
 
 .flexList {

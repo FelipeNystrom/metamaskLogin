@@ -4,15 +4,18 @@ ul {
   flex-direction: column;
   padding: 0.5em;
   overflow-y: scroll;
-  max-height: 70%;
+  min-height: 55%;
+  flex: 3;
 }
 
 .list {
-  max-height: 70%;
   flex: 3;
+  width: 80%;
+  margin: 0 auto;
 }
 .listTitle {
   display: flex;
+  flex: 3;
   flex-direction: row;
   justify-content: center;
 }

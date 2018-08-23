@@ -43,8 +43,8 @@ class List extends Component {
             />
           </div>
           <ListWindow>{generateListItems}</ListWindow>
+          <AddToList fetchNewItem={this.fetchNewItem} />
         </div>
-        <AddToList fetchNewItem={this.fetchNewItem} />
       </Fragment>
     );
   }

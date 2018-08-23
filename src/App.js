@@ -59,6 +59,9 @@ class App extends Component {
   };
 
   render() {
+    const centerLoading = {
+      margin: 'auto auto'
+    };
     const { isLoggedIn, user, metamaskError, checkingForMetaMask } = this.state;
     // auth middleware to check login
     const PrivateRoute = ({ render: Component, ...rest }) => (
@@ -83,7 +86,7 @@ class App extends Component {
     return (
       <div className="App">
         {checkingForMetaMask ? (
-          <h1>{checkingForMetaMask}</h1>
+          <h1 style={centerLoading}>{checkingForMetaMask}</h1>
         ) : (
           <Router>
             <Fragment>
