@@ -18,7 +18,6 @@ class addToList extends Component {
   };
 
   checkKey = e => {
-    console.log(typeof e.key);
     if (e.key === 'Enter') {
       this.props.fetchNewItem(this.state.input);
       this.setState({ input: '' });
