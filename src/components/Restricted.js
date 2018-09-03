@@ -6,7 +6,7 @@ import './Restricted.css';
 class Restricted extends Component {
   state = {
     userAlreadyExist: false,
-    createList: false
+    listView: false
   };
 
   componentDidMount() {
@@ -67,37 +67,26 @@ class Restricted extends Component {
     console.log(isUserCreated);
   };
 
-  handleCreateList = e => {
+  toggleListView = e => {
     e.preventDefault();
-    this.setState({ createList: true });
-  };
-
-  handleSaveList = e => {
-    e.preventDefault();
-    this.setState({ createList: false });
+    this.setState({ listView: !this.state.listView });
   };
 
   render() {
     const { user } = this.props;
-    const { createList } = this.state;
+    const { listView } = this.state;
 
     return (
       <div className="mainView">
         <div className="mainNav">
           <span>Welcome {user}</span>
-          {createList ? (
-            <button onClick={this.handleSaveList} className="saveNewList">
-              Save List
-            </button>
-          ) : (
-            <button onClick={this.handleCreateList} className="createNewList">
-              Create New List
-            </button>
-          )}
+          <button onClick={this.toggleListView} className="button">
+            listView
+          </button>
         </div>
 
         <div className="flexList">
-          {createList ? <List user={user} /> : <ListDashboard />}
+          {listView ? <List user={user} /> : <ListDashboard />}
         </div>
       </div>
     );
